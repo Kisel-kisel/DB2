@@ -1,0 +1,10 @@
+1.
+UPDATE Suppliers
+SET ContactName = ""
+WHERE Country IN ('Chine','USA')
+2.
+UPDATE Products
+SET Price = 10
+WHERE CategoryID IS NULL
+AND 
+Price<=20
