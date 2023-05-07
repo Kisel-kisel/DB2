@@ -2,9 +2,8 @@
 SELECT * 
 FROM Orders
 JOIN Customers ON Orders.CustomerID=Customers.CustomerID
-WHERE Customers.Country != "UK"
+WHERE Customers.Country != "USA"
 3.
-SELECT 
-Price * (1-0.9) AS Price_disc
-FROM [Products]
+UPDATE Products 
+SET  Price = Price * 0.9
 WHERE Price BETWEEN 50 AND 90
