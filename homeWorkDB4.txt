@@ -1,0 +1,25 @@
+1.
+SELECT 
+SupplierName,
+COUNT(*) as total_products
+FROM [Products]
+JOIN Suppliers ON Products.SupplierID=Suppliers.SupplierID
+GROUP BY SupplierName
+ORDER BY total_products desc
+2.
+SELECT 
+CategoryName,
+COUNT(*) as total_category_Name
+FROM [Products]
+JOIN Categories ON Products.CategoryID = Categories.CategoryID
+GROUP BY CategoryName
+ORDER BY total_category_Name desc
+Limit 1
+3.
+SELECT 
+OrderID,
+SUM(Price) AS OrderID_Price
+FROM [Products]
+JOIN OrderDetails ON Products.ProductID=OrderDetails.ProductID
+GROUP BY OrderID
+ORDER BY OrderID_Price desc
