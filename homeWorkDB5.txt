@@ -1,0 +1,29 @@
+1.
+INSERT INTO donations(donation_id, created_at, donator_id, amount, stream_id)
+VALUES
+(1,CURRENT_TIMESTAMP,1,123,1),
+(2,CURRENT_TIMESTAMP,2,456,3),
+(3,CURRENT_TIMESTAMP,3,789,2)
+2.
+SELECT 
+SUM(amount)
+FROM donations
+3.
+SELECT users.fullname,
+users.country,
+donations.amount
+FROM donations
+JOIN users ON users.user_id=donations.donator_id
+4.
+SELECT users.fullname,
+SUM(donations.amount) AS amountFromUser
+FROM donations
+JOIN users ON users.user_id=donations.donator_id
+ORDER BY donations.amount DESC
+LIMIT 1
+5.
+SELECT users.fullname,
+donations.amount
+FROM streams
+JOIN users ON users.user_id=streams.author_id
+JOIN donations on streams.stream_id=donations.stream_id
