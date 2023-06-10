@@ -1,0 +1,56 @@
+1.Выполнить расчет З/П менеджеров за весь период заказов из расчета ставки в 10%
+
+SELECT 
+SupplierName,
+SUM(Price) * 0.1 AS salary_suplairs
+FROM [Products]
+JOIN Suppliers ON Suppliers.SupplierID=Products.SupplierID
+GROUP BY SupplierName
+ORDER BY salary_suplairs DESC
+
+SELECT 
+Employees.LastName,
+SUM(Price) * 0.1 AS salary
+FROM [Orders]
+JOIN Employees ON Employees.EmployeeID=Orders.EmployeeID
+JOIN OrderDetails ON OrderDetails.OrderID=Orders.OrderID
+JOIN Products ON Products.ProductID=OrderDetails.ProductID
+GROUP BY LastName
+
+
+2.Вывести сотрудников, у которых ко-во заказов менее 20
+
+SELECT 
+Employees.LastName,
+Count(*) AS employeer_order
+FROM [Orders]
+JOIN Employees ON Employees.EmployeeID=Orders.EmployeeID
+GROUP BY Employees.LastName
+HAVING employeer_order < 20
+
+3.Вывести названия компаний-перевозчиков и сколько заказов каждая из них доставила
+SELECT 
+ShipperName,
+Count(*) AS destin
+FROM [Orders]
+JOIN Shippers ON Shippers.ShipperID=Orders.ShipperID
+GROUP BY Shippers.ShipperID
+
+4.Для клиентов из Mexico очистить контактные имена
+UPDATE Customers
+SET ContactName=''
+WHERE Country='Mexico'
+
+5.Описать связи между таблицами, напр., след. образом:
+Orders.CustomerID (M:1) Customers.CustomerID
+
+Categories.CategoryID (1:M) Products.CategoryID
+Employees.EmployeeID (1:M) Orders.EmployeeID
+OrderDetails.OrderID (M:1) Orders.OrderID
+OrderDetails.ProductID (M:1) Products.ProductID
+Orders.ShipperID (M:1) ShippersShipperID
+Products.SupplierID (M:1) Suppliers.SupplierID
+
+
+
+
